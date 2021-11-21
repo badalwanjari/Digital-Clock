@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Transitions</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Comforter&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="light-theme.css" id="theme-link" />
+  </head>
+  <body>
+    <div class="main-screen">
+      <div class="navbar">
+        <nav>
+          <h2>Digital Clock</h2>
+        </nav>
+        <button>Toggle</button>
+      </div>
+      <div class="container">
+        <div id="hour">00</div>
+        <div class="colon">:</div>
+        <div id="min">00</div>
+        <div class="colon">:</div>
+        <div id="sec">00</div>
+      </div>
+    </div>
+  </body>
+  <script>
+    function n(num) {
+      if (num < 10) {
+        return "0" + num;
+      } else {
+        return num;
+      }
+    }
+    function Twelve(num) {
+      if (num > 12) {
+        return n(num - 12);
+      }
+      return n(num);
+    }
+    setInterval(() => {
+      var a = new Date();
+      document.getElementById("hour").innerText = Twelve(a.getHours());
+      document.getElementById("min").innerText = n(a.getMinutes());
+      document.getElementById("sec").innerText = n(a.getSeconds());
+    }, 1000);
+    const btn = document.querySelector("button");
+    // Select the stylesheet <link>
+    const theme = document.querySelector("#theme-link");
+
+    // Listen for a click on the button
+    btn.addEventListener("click", function () {
+      // If the current URL contains "ligh-theme.css"
+      if (theme.getAttribute("href") == "light-theme.css") {
+        // ... then switch it to "dark-theme.css"
+        theme.href = "dark-theme.css";
+        btn.innerText="Light Mode";
+        // Otherwise...
+      } else {
+        // ... switch it to "light-theme.css"
+        theme.href = "light-theme.css";
+        btn.innerText="Dark Mode";
+      }
+    });
+  </script>
+</html>
